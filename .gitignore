@@ -1,0 +1,40 @@
+# User-specific files
+.vs/
+.vscode/
+.idea/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+# Build results
+bin/
+obj/
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+tools/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# JetBrains Rider
+.idea/
+
+# VS Code settings
+.vscode/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
