@@ -3,16 +3,21 @@ import { Book } from './types/Book';
 
 function BookList() {
   const [books, setBooks] = useState<Book[]>([]);
-  const [pageSize, setPageSize] = useState<number>(10);
+  const [pageSize, setPageSize] = useState<number>(5);
   const [pageNum, setPageNum] = useState<number>(1);
   const [totalItems, setTotalItems] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(0);
+  const [sortOrder, setSortOrder] = useState<string | null>(null); //default is null (no sorting)
 
   useEffect(() => {
     const fetchBooks = async () => {
-      const response = await fetch(
-        `https://localhost/book/allbooks?pageSize=${pageSize}&pageNum=${pageNum}`
-      );
+      let url = `https://localhost:5000/Book/AllBooks?pageSize=${pageSize}&pageNum=${pageNum}`;
+
+      if (sortOrder) {
+        url += `&sortOrder=${sortOrder}`;
+      }
+
+      const response = await fetch(url);
       const data = await response.json();
       setBooks(data.books);
       setTotalItems(data.totalNumBooks);
@@ -20,11 +25,18 @@ function BookList() {
     };
 
     fetchBooks();
-  }, [pageSize, pageNum, totalItems]);
+  }, [pageSize, pageNum, sortOrder]);
 
   return (
     <>
       <h1>Books</h1>
+      <br />
+      {/* Sorting Buttons */}
+      <div>
+        <button onClick={() => setSortOrder(null)}>Default Order</button>
+        <button onClick={() => setSortOrder('asc')}>Sort A → Z</button>
+        <button onClick={() => setSortOrder('desc')}>Sort Z → A</button>
+      </div>
       <br />
       {books.map((b) => (
         <div id="bookCard" className="card" key={b.bookId}>
@@ -64,6 +76,7 @@ function BookList() {
         </div>
       ))}
 
+      {/* Pagination Controls */}
       <button disabled={pageNum === 1} onClick={() => setPageNum(pageNum - 1)}>
         Previous
       </button>
@@ -86,6 +99,7 @@ function BookList() {
       </button>
 
       <br />
+      {/* Page Size Selector */}
       <label>
         Results per page:
         <select

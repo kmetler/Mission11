@@ -16,14 +16,24 @@ namespace Mission11.Controllers
         }
 
         [HttpGet("AllBooks")]
-        public IActionResult GetBooks(int pageSize = 10, int pageNum = 1)
+        public IActionResult GetBooks(int pageSize = 5, int pageNum = 1, string? sortOrder = null)
         {
-            var books = _bookContext.Books
+            var query = _bookContext.Books.AsQueryable();
+
+            // Apply sorting only if sortOrder is specified
+            if (!string.IsNullOrEmpty(sortOrder))
+            {
+                query = sortOrder.ToLower() == "desc"
+                    ? query.OrderByDescending(b => b.Title)
+                    : query.OrderBy(b => b.Title);
+            }
+
+            var books = query
                 .Skip((pageNum - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
 
-            var totalNumBooks = _bookContext.Books.Count();
+            var totalNumBooks = query.Count();
 
             var bookObject = new
             {
