@@ -7,7 +7,7 @@ function BookList({ selectedCategories }: { selectedCategories: string[] }) {
   const [pageSize, setPageSize] = useState<number>(5);
   const [pageNum, setPageNum] = useState<number>(1);
   const [totalItems, setTotalItems] = useState<number>(0);
-  const [totalPages, setTotalPages] = useState<number>(0);
+  // const [totalPages, setTotalPages] = useState<number>(0);
   const [sortOrder, setSortOrder] = useState<string | null>(null); //default is null (no sorting)
   const navigate = useNavigate();
 
@@ -25,13 +25,17 @@ function BookList({ selectedCategories }: { selectedCategories: string[] }) {
 
       const response = await fetch(url);
       const data = await response.json();
+
       setBooks(data.books);
       setTotalItems(data.totalNumBooks);
-      setTotalPages(Math.ceil(totalItems / pageSize));
+      // setTotalPages(Math.ceil(totalItems / pageSize));
     };
 
     fetchBooks();
   }, [pageSize, pageNum, sortOrder, selectedCategories]);
+
+  // Calculate totalPages dynamically from totalItems instead of setting it once
+  const totalPages = Math.ceil(totalItems / pageSize);
 
   return (
     <>

@@ -16,13 +16,13 @@ function CartPage() {
       <div className="row">
         <div className="col-md-8">
           {cart.length === 0 ? (
-            <p className="alert alert-warning">You cart is empty</p>
+            <p className="alert alert-warning text-center">You cart is empty</p>
           ) : (
             <ul className="list-group">
               {cart.map((item: CartItem) => (
                 <li
                   key={item.bookId}
-                  className="list-group-item d-flex justify-content-between align-items-center"
+                  className="list-group-item d-flex flex-column text-center align-items-center"
                 >
                   <div>
                     <strong>{item.title}</strong> <br />
@@ -32,7 +32,7 @@ function CartPage() {
                     <strong>${(item.price * item.quantity).toFixed(2)}</strong>
                   </div>
                   <button
-                    className="btn btn-danger btn-sm"
+                    className="btn btn-danger btn-sm mt-2"
                     onClick={() => removeFromCart(item.bookId)}
                   >
                     Remove
@@ -45,7 +45,7 @@ function CartPage() {
 
         {/* Sidebar for total and buttons */}
         <div className="col-md-4">
-          <div className="card p-3">
+          <div className="card p-3 text-center">
             <h3>Total: ${calculateTotal().toFixed(2)}</h3>
             <button className="btn btn-primary btn-block mt-3">Checkout</button>
             <button
