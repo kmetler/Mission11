@@ -16,7 +16,9 @@ function CartPage() {
       <div className="row">
         <div className="col-md-8">
           {cart.length === 0 ? (
-            <p className="alert alert-warning text-center">You cart is empty</p>
+            <p className="alert alert-warning text-center">
+              Your cart is empty
+            </p>
           ) : (
             <ul className="list-group">
               {cart.map((item: CartItem) => (
