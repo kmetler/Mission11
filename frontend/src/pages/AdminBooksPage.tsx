@@ -125,6 +125,12 @@ const AdminBooksPage = () => {
               <td>{b.price}</td>
               <td>
                 <button
+                  className="btn btn-primary btn-sm w-100 mb-1"
+                  onClick={() => setEditingBook(b)}
+                >
+                  Edit
+                </button>
+                <button
                   className="btn btn-danger btn-sm w-100"
                   onClick={() => handleDelete(b.bookId)}
                 >

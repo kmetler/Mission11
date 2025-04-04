@@ -18,7 +18,7 @@ export const fetchBooks = async (
       .map((cat) => `categories=${encodeURIComponent(cat)}`)
       .join('&');
 
-    let url = `${API_URL}/Book/AllBooks?pageSize=${pageSize}&pageNum=${pageNum}${selectedCategories.length ? `&${categoryParams}` : ''}`;
+    let url = `${API_URL}/AllBooks?pageSize=${pageSize}&pageNum=${pageNum}${selectedCategories.length ? `&${categoryParams}` : ''}`;
 
     if (sortOrder) {
       url += `&sortOrder=${sortOrder}`;
