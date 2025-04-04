@@ -7,7 +7,7 @@ interface FetchBooksResponse {
 
 // const API_URL = 'https://localhost:5000/Book';
 const API_URL =
-  'https://mission13-metler-backend-htf3amfqa9aqhnbz.eastus-01.azurewebsites.net/Book';
+  'https://mission13-metler-backend-htf3amfqa9aqhnbz.eastus-01.azurewebsites.net/book';
 
 export const fetchBooks = async (
   pageSize: number,
